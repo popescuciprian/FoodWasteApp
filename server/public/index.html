@@ -1,8 +1,38 @@
 <html>
     <head>
         <title>FWApp</title>
+        <script>
+
+            function getUsers(){
+                window.fetch('/app_users')
+                .then(response => response.text())
+                .then(js =>document.getElementById('console').innerHTML = js)
+            }
+            
+            function getFoods(){
+                window.fetch('/foods')
+                .then(response => response.text())
+                .then(js =>document.getElementById('console').innerHTML = js)
+            }
+            
+                function getFoodForUsername(){
+                let username = document.getElementById('txt').value;
+                if(username)
+                window.fetch(`/${username}/foods`)
+                .then(response => response.text())
+                .then(js =>document.getElementById('console').innerHTML = js)
+            }
+            
+            
+            
+        </script>
     </head>
     <body>
         <h1>Food Waste App route dummy tester</h1>
+        <button onclick="getUsers()">List all users</button>
+        <button onclick="getFoods()">List all foods</button>
+        <button onclick="getFoodForUsername()">List food of specific username</button>
+        <input id="txt" type="text" value="username">
+        <div id=console></div>
     </body>
 </html>
