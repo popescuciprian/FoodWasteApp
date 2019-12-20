@@ -43,11 +43,11 @@ try{
 });
 
 app.get('/food_categories', async(req,res)=>{
-    
+    //TODO
 });
 
 app.get('/relationships', async(req,res)=>{
-    
+    //TODO
 });
 
 app.post('/app_users',async (req,res)=>{
@@ -94,11 +94,11 @@ app.post('/:app_user/foods', async(req,res)=>{
 });
 
 app.post('/food_categories', async(req,res)=>{
-    
+    //TODO
 });
 
 app.post('/relationships', async(req,res)=>{
-    
+    //TODO
 });
 
 app.listen(8080);
