@@ -1,6 +1,6 @@
 'use strict'
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('foodwasteapp', 'FWAuser', 'FWApassword', {
+const sequelize = new Sequelize('food_waste_app', 'fwadmin', 'fwpassword', {
     dialect: "mysql",
     define: { timestamps: false },
     logging:false
