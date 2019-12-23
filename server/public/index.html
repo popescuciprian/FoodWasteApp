@@ -23,6 +23,22 @@
                 .then(js =>document.getElementById('console').innerHTML = js)
             }
             
+            function addFoodForUsername(){
+                let app_user = document.getElementById('txt').value;
+                let food = {
+                    name:document.getElementById('fname').value,
+                    exp_date:document.getElementById('fexp').value,
+                    availability:document.getElementById('favail').value
+                }
+                window.fetch(`/${app_user}/foods`,{
+                     method: 'post',
+                     type:'application/JSON',
+                     body: JSON.stringify(food)
+                  })
+                  .catch((err)=>{throw new Error(err)})
+                .then(response => response.text())
+                .then(js =>document.getElementById('console').innerHTML = js)
+            }
             
             
         </script>
@@ -33,6 +49,14 @@
         <button onclick="getFoods()">List all foods</button>
         <button onclick="getFoodForUsername()">List food of specific username</button>
         <input id="txt" type="text" value="username">
+        <form>
+            <div>Add food for username</div>
+            <input id="fname" type="text" value="">
+            <input id="fexp" type="text" value="">
+            <input id="favail" type="text" value="">
+            <button onclick="addFoodForUsername()">add</button>
+            
+        </form>
         <div id=console></div>
     </body>
 </html>
