@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import FoodContainer from './FoodContainer'
 import './App.css';
 
-function FWApp() {
-  return (
-    <div className="FWApp">
+class FWApp extends Component {
+  constructor(params){
+      super(params);
+      const username = params.username;
+  }
+
+  render() {
+    return <div className="FWApp">
       <header className="App-header">
-        <h1>Time to make the UI</h1>
+        <h1>FoodWasteApp</h1>
       </header>
+        <FoodContainer username={this.username}/>
     </div>
-  );
+  }
 }
 
 export default FWApp;

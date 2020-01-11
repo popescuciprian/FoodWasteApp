@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import App from './FWApp'
+import FWApp from './FWApp'
 const SERVER = "http://52.15.229.11:8080";
 class LoginRegisterComponents extends Component {
 
@@ -21,7 +21,7 @@ class LoginRegisterComponents extends Component {
                 if (result.message !== "Authorized!")
                     document.querySelector('#err_label').textContent = result.message;
                 else {
-                    ReactDOM.render(<App/>, document.getElementById('root'));
+                    ReactDOM.render(<FWApp username={credentials.username}/>, document.getElementById('root'));
                 }
             });
     }
