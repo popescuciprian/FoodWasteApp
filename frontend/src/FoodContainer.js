@@ -20,7 +20,7 @@ class FoodContainer extends Component {
         return <div className="food_container">
             {
                 this.state.foodList.map((food) =>
-                    <div key={food.category}>
+                    <div key={food.id}>
                         <div>{food.name}</div>
                         <div>{food.exp_date}</div>
                         <div>{food.availability.toString()}</div>

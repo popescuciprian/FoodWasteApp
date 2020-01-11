@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import FoodContainer from './FoodContainer'
+import AddFood from './AddFood'
 import './App.css';
 
 class FWApp extends Component {
   constructor(params){
       super(params);
-      const username = params.username;
+      this.username = params.username;
   }
 
   render() {
@@ -14,6 +15,7 @@ class FWApp extends Component {
         <h1>FoodWasteApp</h1>
       </header>
         <FoodContainer username={this.username}/>
+        <AddFood username={this.username}/>
     </div>
   }
 }
