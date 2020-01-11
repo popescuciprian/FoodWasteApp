@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
+import App from './FWApp'
 const SERVER = "http://52.15.229.11:8080";
 class LoginRegisterComponents extends Component {
 
@@ -11,15 +11,19 @@ class LoginRegisterComponents extends Component {
         credentials.password = document.querySelector('.login_container>input[type="password"]').value;
 
         fetch(`${SERVER}/login`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: credentials
+            body: JSON.stringify(credentials)
         }).then(response => response.json())
-        .then(result=>{
-            console.log(result.message);
-        });
+            .then(result => {
+                if (result.message !== "Authorized!")
+                    document.querySelector('#err_label').textContent = result.message;
+                else {
+                    ReactDOM.render(<App/>, document.getElementById('root'));
+                }
+            });
     }
 
     doRegister() {

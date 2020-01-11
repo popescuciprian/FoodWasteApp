@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+function FWApp() {
   return (
-    <div className="App">
+    <div className="FWApp">
       <header className="App-header">
+        <h1>Time to make the UI</h1>
       </header>
     </div>
   );
 }
 
-export default App;
+export default FWApp;
