@@ -24,7 +24,7 @@ router.post('/register',async (req,res)=>{
     }
 });
 
-router.get('/login',async (req,res)=>{
+router.post('/login',async (req,res)=>{
     if(req.body){
         let payload = req.body;
         let user = await tables.AppUser.findOne({
