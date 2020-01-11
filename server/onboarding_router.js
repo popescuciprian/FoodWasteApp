@@ -4,7 +4,7 @@ const tables = require('./tables.js');
 const router = express.Router();
 router.use(bodyParser.json());
 
-router.post('/register',(req,res)=>{
+router.post('/register',async (req,res)=>{
     if(req.body){
         let payload = req.body;
         let conflictUser = await tables.AppUser.findOne({
