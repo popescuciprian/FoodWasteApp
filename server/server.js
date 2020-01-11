@@ -1,10 +1,12 @@
 const tables = require('./tables.js');
 const express = require('express')
-const bodyParser = require('body-parser')
+const onboarding = require('./onboarding_router.js');
+const bodyParser = require('body-parser');
 const app = express()
 app.use(bodyParser.json())
 tables.sync();
 app.use(express.static(__dirname+'/public'));
+app.use('/',onboarding);
 
 app.get('/app_users',async (req,res)=>{
     try{
