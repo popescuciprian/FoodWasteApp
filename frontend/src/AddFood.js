@@ -7,7 +7,8 @@ class AddFood extends Component {
         this.username = params.username;
     }
 
-    addFood() {
+    addFood(username) {
+        let dateRegEx = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
         let inputs = document.querySelectorAll('.add_food_container>input');
         let select = document.querySelector('.add_food_container>select');
         let food = {
@@ -16,7 +17,20 @@ class AddFood extends Component {
             availability: inputs[2].checked,
             category: select.value,
         }
-        console.log(food);
+
+        if(food.name.length >= 3 && food.exp_date.match(dateRegEx)){
+            fetch(`${SERVER}/${username}/foods`,{
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(food)
+            })
+            .then(response => response.json())
+            .then(result=>{
+                console.log(result);
+            });
+        }
     }
 
     render() {
@@ -27,7 +41,7 @@ class AddFood extends Component {
             <label><b>Category</b></label>
             <select>
                 <option value="fruits/vegetables">fruits/vegetables</option>
-                <option value="gains/nuts">gains/nuts</option>
+                <option value="gains/nuts">grains/nuts</option>
                 <option value="meat/seafood">meat/seafood</option>
                 <option value="dairy">dairy</option>
                 <option value="sweets">sweets</option>
@@ -39,7 +53,7 @@ class AddFood extends Component {
             <label><b>Availability to share</b></label>
             <input type="checkbox" />
 
-            <button type="submit" onClick={this.addFood}>Add!</button>
+            <button type="submit" onClick={()=>this.addFood(this.username)}>Add!</button>
         </div>
     }
 }

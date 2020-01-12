@@ -9,7 +9,6 @@ class FoodContainer extends Component {
         }
     }
     async componentDidMount() {
-        this.username = "Toucan"
         this.foodList = await fetch(`${SERVER}/${this.username}/foods`)
             .then(response => response.json())
         this.setState({
