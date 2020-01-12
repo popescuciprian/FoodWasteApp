@@ -26,17 +26,11 @@ const Food = sequelize.define('food', {
         allowNull: false
     },
     exp_date: Sequelize.DATE,
-    availability: Sequelize.BOOLEAN
+    availability: Sequelize.BOOLEAN,
+    category:Sequelize.ENUM(['fruits/vegetables', 'grains/nuts', 'meat/seafood', 'dairy', 'sweets'])
 });
 AppUser.hasMany(Food);
 Food.belongsTo(AppUser);
-
-//=============================================================================
-const FoodCategory = sequelize.define('food_category', {
-    name: Sequelize.ENUM(['fruits/vegetables', 'gains/nuts', 'meat/seafood', 'dairy', 'sweets'])
-});
-FoodCategory.hasMany(Food);
-Food.belongsTo(FoodCategory);
 //=============================================================================
 const UserRelationship = sequelize.define('user_relationship', {
     relatingUserID: {
@@ -61,7 +55,6 @@ module.exports = {
     },
     AppUser,
     Food,
-    FoodCategory,
     UserRelationship
 };
 
