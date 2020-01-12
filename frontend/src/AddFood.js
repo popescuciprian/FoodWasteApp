@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import FoodServer from './FoodServer';
 const SERVER = "http://52.15.229.11:8080";
 
 class AddFood extends Component {
     constructor(params) {
         super(params)
         this.username = params.username;
+        this.foodServer = new FoodServer(this.username);
     }
 
-    addFood(username) {
+    addFood() {
         let dateRegEx = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
         let inputs = document.querySelectorAll('.add_food_container>input');
         let select = document.querySelector('.add_food_container>select');
@@ -19,17 +21,7 @@ class AddFood extends Component {
         }
 
         if(food.name.length >= 3 && food.exp_date.match(dateRegEx)){
-            fetch(`${SERVER}/${username}/foods`,{
-                method:'POST',
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify(food)
-            })
-            .then(response => response.json())
-            .then(result=>{
-                console.log(result);
-            });
+            this.foodServer.sendFood(food);
         }
     }
 
@@ -53,7 +45,7 @@ class AddFood extends Component {
             <label><b>Availability to share</b></label>
             <input type="checkbox" />
 
-            <button type="submit" onClick={()=>this.addFood(this.username)}>Add!</button>
+            <button type="submit" onClick={()=>this.addFood()}>Add!</button>
         </div>
     }
 }
