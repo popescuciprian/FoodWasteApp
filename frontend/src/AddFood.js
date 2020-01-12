@@ -41,7 +41,7 @@ class AddFood extends Component {
             <label><b>Category</b></label>
             <select>
                 <option value="fruits/vegetables">fruits/vegetables</option>
-                <option value="gains/nuts">grains/nuts</option>
+                <option value="grains/nuts">grains/nuts</option>
                 <option value="meat/seafood">meat/seafood</option>
                 <option value="dairy">dairy</option>
                 <option value="sweets">sweets</option>
