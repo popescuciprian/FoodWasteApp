@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import FoodContainer from './FoodContainer'
 import AddFood from './AddFood'
 import './App.css';
+import FoodServer from './FoodServer';
+
 
 class FWApp extends Component {
   constructor(params){
       super(params);
       this.username = params.username;
+      FoodServer.username = this.username;
   }
 
   render() {

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import FoodServer from './FoodServer';
-const SERVER = "http://52.15.229.11:8080";
 
 class AddFood extends Component {
     constructor(params) {
         super(params)
         this.username = params.username;
-        this.foodServer = new FoodServer(this.username);
     }
 
     addFood() {
@@ -21,7 +19,7 @@ class AddFood extends Component {
         }
 
         if(food.name.length >= 3 && food.exp_date.match(dateRegEx)){
-            this.foodServer.sendFood(food);
+            FoodServer.sendFood(food);
         }
     }
 

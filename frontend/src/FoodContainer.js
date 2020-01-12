@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FoodServer from './FoodServer'
-const SERVER = "http://52.15.229.11:8080";
 
 class FoodContainer extends Component {
     constructor(params) {
@@ -9,21 +8,22 @@ class FoodContainer extends Component {
         this.state = {
             foodList: []
         }
-        this.foodServer = new FoodServer(this.username);
     }
     componentDidMount() {
-        this.foodServer.getFoods();
+        FoodServer.getFoods();
         
-        this.foodServer.emitter.addListener('GET_FOODS_SUCCESS', () => {
-            console.log('get food intercepted');
+        FoodServer.emitter.addListener('GET_FOODS_SUCCESS', () => {
             this.setState({
-                foodList: this.foodServer.foodList
+                foodList: FoodServer.foodList
             })
         });
 
-        this.foodServer.emitter.addListener('RELOAD_FOODS', () => {
+        FoodServer.emitter.addListener('ADD_FOOD', (food) => {
             console.log('reload intercepted')
-            this.foodServer.getFoods();
+            FoodServer.foodList.push(food);
+            this.setState({
+                foodList: FoodServer.foodList
+            })
         });
     }
     render() {
