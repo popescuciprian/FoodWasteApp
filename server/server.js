@@ -111,7 +111,8 @@ app.post('/:app_user/claim', async(req,res)=>{
         
         let food = req.body;
         await tables.Food.update({
-            appUserId:user.id
+            appUserId:user.id,
+            availability:false
         },{
             where:{
                 id:food.id
