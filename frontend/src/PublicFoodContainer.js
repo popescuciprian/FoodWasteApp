@@ -18,7 +18,7 @@ class PublicFoodContainer extends Component {
         });
 
         FoodServer.emitter.addListener('ADD_FOOD', (food) => {
-            if (FoodServer.publicFoodList.indexOf(food) === -1)
+            if (FoodServer.publicFoodList.indexOf(food) === -1 && food.availability)
                 FoodServer.publicFoodList.push(food);
             this.setState({
                 foodList: FoodServer.publicFoodList

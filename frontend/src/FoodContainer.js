@@ -26,16 +26,31 @@ class FoodContainer extends Component {
             })
         });
     }
+
+    exposeFood(food) {
+        food.availability = true;
+        FoodServer.exposeFood(food);
+    }
     render() {
         return <div className="food_container">
             {
-                this.state.foodList.map((food) =>
-                    <div className="food_item" key={food.id}>
+                this.state.foodList.map((food) => {
+                    let colorString = "black";
+                    let DAY = 86400000;
+                    if (Date.parse(food.exp_date) < Date.now()) {
+                        colorString = "red";
+                    }
+                    if (Date.parse(food.exp_date) > Date.now() && Date.parse(food.exp_date)<Date.now()+7*DAY) {
+                        colorString = "orange";
+                    }
+                    return <div style={{ color: colorString }} className="food_item" key={food.id}>
                         <div>{food.name}</div>
                         <div>{food.category}</div>
                         <div>{"Exp.:" + food.exp_date.slice(0, 10)}</div>
                         <div>{food.availability ? "Public" : "Private"}</div>
+                        <button type="button" onClick={() => this.exposeFood(food)}>Expose</button>
                     </div>
+                }
                 )
             }
         </div>

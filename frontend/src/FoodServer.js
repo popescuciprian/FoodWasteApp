@@ -44,4 +44,8 @@ FoodServer.claimFood = async function claimFood(food){
         .then(FoodServer.emitter.emit('ADD_FOOD',food))
         .then(FoodServer.emitter.emit('REMOVE_FOOD',food));
 }
+
+FoodServer.exposeFood = async function exposeFood(food){
+    console.warn(food);
+}
 export default FoodServer

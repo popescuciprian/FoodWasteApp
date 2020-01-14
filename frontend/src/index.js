@@ -6,5 +6,5 @@ import Onboarding from './Onboarding';
 import FWApp from './FWApp';
 
 // ReactDOM.render(<Onboarding />, document.getElementById('root'));
-ReactDOM.render(<FWApp username="Bulbu"/>, document.getElementById('root'));
+ReactDOM.render(<FWApp username="kakapo"/>, document.getElementById('root'));
 serviceWorker.unregister();
