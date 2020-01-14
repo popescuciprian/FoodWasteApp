@@ -11,7 +11,7 @@ class FoodContainer extends Component {
     }
     componentDidMount() {
         FoodServer.getFoods();
-        
+
         FoodServer.emitter.addListener('GET_FOODS_SUCCESS', () => {
             this.setState({
                 foodList: FoodServer.foodList
@@ -19,7 +19,8 @@ class FoodContainer extends Component {
         });
 
         FoodServer.emitter.addListener('ADD_FOOD', (food) => {
-            FoodServer.foodList.push(food);
+            if (FoodServer.foodList.indexOf(food) === -1)
+                FoodServer.foodList.push(food);
             this.setState({
                 foodList: FoodServer.foodList
             })
@@ -32,8 +33,8 @@ class FoodContainer extends Component {
                     <div className="food_item" key={food.id}>
                         <div>{food.name}</div>
                         <div>{food.category}</div>
-                        <div>{"Exp.:"+food.exp_date.slice(0,10)}</div>
-                        <div>{food.availability?"Public":"Private"}</div>
+                        <div>{"Exp.:" + food.exp_date.slice(0, 10)}</div>
+                        <div>{food.availability ? "Public" : "Private"}</div>
                     </div>
                 )
             }

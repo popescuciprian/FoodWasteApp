@@ -33,6 +33,15 @@ FoodServer.sendFood = async function sendFood(food) {
 }
 
 FoodServer.claimFood = async function claimFood(food){
-    
+    fetch(`${SERVER}/${this.username}/claim`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(food)
+    })
+        .then(response => response.json())
+        .then(FoodServer.emitter.emit('ADD_FOOD',food))
+        .then(FoodServer.emitter.emit('REMOVE_FOOD',food));
 }
 export default FoodServer

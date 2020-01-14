@@ -10,7 +10,7 @@ class PublicFoodContainer extends Component {
     }
     componentDidMount() {
         FoodServer.getPublicFoods();
-        
+
         FoodServer.emitter.addListener('GET_PUBLIC_FOODS_SUCCESS', () => {
             this.setState({
                 publicFoodList: FoodServer.publicFoodList
@@ -18,15 +18,24 @@ class PublicFoodContainer extends Component {
         });
 
         FoodServer.emitter.addListener('ADD_FOOD', (food) => {
-            FoodServer.publicFoodList.push(food);
+            if (FoodServer.publicFoodList.indexOf(food) === -1)
+                FoodServer.publicFoodList.push(food);
+            this.setState({
+                foodList: FoodServer.publicFoodList
+            })
+        });
+
+        FoodServer.emitter.addListener('REMOVE_FOOD', (food) => {
+            if (FoodServer.publicFoodList.indexOf(food) > -1)
+                FoodServer.publicFoodList.splice(FoodServer.publicFoodList.indexOf(food),1);
             this.setState({
                 foodList: FoodServer.publicFoodList
             })
         });
     }
-    claimFood(food){
-       food.availability = false;
-       FoodServer.sendFood(food);
+    claimFood(food) {
+        food.availability = false;
+        FoodServer.claimFood(food);
     }
     render() {
         return <div className="public_food_container">
@@ -35,8 +44,8 @@ class PublicFoodContainer extends Component {
                     <div className="food_item" key={food.id}>
                         <div>{food.name}</div>
                         <div>{food.category}</div>
-                        <div>{"Exp.:"+food.exp_date.slice(0,10)}</div>
-                        <button type="button" onClick={()=>this.claimFood(food)}>Claim</button>
+                        <div>{"Exp.:" + food.exp_date.slice(0, 10)}</div>
+                        <button type="button" onClick={() => this.claimFood(food)}>Claim</button>
                     </div>
                 )
             }
