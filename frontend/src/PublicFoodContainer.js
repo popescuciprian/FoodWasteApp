@@ -5,7 +5,7 @@ class PublicFoodContainer extends Component {
     constructor(params) {
         super(params);
         this.state = {
-            foodList: []
+            publicFoodList: []
         }
     }
     componentDidMount() {
@@ -13,18 +13,30 @@ class PublicFoodContainer extends Component {
         
         FoodServer.emitter.addListener('GET_PUBLIC_FOODS_SUCCESS', () => {
             this.setState({
-                foodList: FoodServer.foodList
+                publicFoodList: FoodServer.publicFoodList
             })
         });
+
+        FoodServer.emitter.addListener('ADD_FOOD', (food) => {
+            FoodServer.publicFoodList.push(food);
+            this.setState({
+                foodList: FoodServer.publicFoodList
+            })
+        });
+    }
+    claimFood(food){
+       food.availability = false;
+       FoodServer.sendFood(food);
     }
     render() {
         return <div className="public_food_container">
             {
-                this.state.foodList.map((food) =>
+                this.state.publicFoodList.map((food) =>
                     <div className="food_item" key={food.id}>
                         <div>{food.name}</div>
                         <div>{food.category}</div>
-                        <div>{food.exp_date.slice(0,10)}</div>
+                        <div>{"Exp.:"+food.exp_date.slice(0,10)}</div>
+                        <button type="button" onClick={()=>this.claimFood(food)}>Claim</button>
                     </div>
                 )
             }

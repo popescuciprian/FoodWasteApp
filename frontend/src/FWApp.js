@@ -18,9 +18,9 @@ class FWApp extends Component {
       <header className="App-header">
         <h1>FoodWasteApp</h1>
       </header>
+        <PublicFoodContainer/>
         <FoodContainer username={this.username}/>
         <AddFood username={this.username}/>
-        <PublicFoodContainer/>
 
     </div>
   }

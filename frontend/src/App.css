@@ -1,9 +1,11 @@
 .food_item{
     padding:10px;
     border: solid 1px;
+    border-radius: 20px;
 }
 .food_item>div:nth-child(1){
     font-size: larger;
+    padding: 3px;
 }
 .food_item>div:nth-child(2){
     font-size: smaller;
@@ -14,11 +16,16 @@
 .food_item>div:nth-child(4){
     font-size: smaller;
 }
-.food_container{
+.food_container,.public_food_container{
+    padding: 10px;
     border: solid 1px;
     width: fit-content;
+    float:left;
+    overflow:hidden; 
+    overflow-y:scroll;
+    height: 800px;
 }
-.public_food_container{
-    border: solid 1px;
-    width: fit-content;
+
+.add_food_container{
+    padding: 10px;
 }

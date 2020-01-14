@@ -13,8 +13,8 @@ FoodServer.getFoods = async function getFoods() {
     FoodServer.emitter.emit('GET_FOODS_SUCCESS')
 }
 FoodServer.getPublicFoods = async function getPublicFoods() {
-    FoodServer.foodList = [];
-    FoodServer.foodList = await fetch(`${SERVER}/foods`)
+    FoodServer.publicFoodList = [];
+    FoodServer.publicFoodList = await fetch(`${SERVER}/foods`)
         .then(response => response.json())
         .catch(err => console.warn(err));
     FoodServer.emitter.emit('GET_PUBLIC_FOODS_SUCCESS')
@@ -30,5 +30,9 @@ FoodServer.sendFood = async function sendFood(food) {
     })
         .then(response => response.json())
         .then(FoodServer.emitter.emit('ADD_FOOD',food));
+}
+
+FoodServer.claimFood = async function claimFood(food){
+    
 }
 export default FoodServer
