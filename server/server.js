@@ -122,7 +122,7 @@ app.post('/:app_user/claim', async(req,res)=>{
         res.status(500).json({message:err.message});
     }
 });
-app.post('/:foodId/expose', async(req,res)=>{
+app.get('/:foodId/expose', async(req,res)=>{
     try{
         let foodId = req.params.foodId;
         await tables.Food.update({
