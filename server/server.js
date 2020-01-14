@@ -21,7 +21,11 @@ app.get('/app_users',async (req,res)=>{
 
 app.get('/foods', async(req,res)=>{
     try{
-    let food = await tables.Food.findAll();
+    let food = await tables.Food.findAll({
+        where:{
+            availability:true
+        }
+    });
     res.status(200).json(food);
 }catch(err){
     res.status(500).json({message:err.message});
@@ -93,6 +97,26 @@ app.post('/:app_user/foods', async(req,res)=>{
         else{
             console.log("what")
         }
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
+});
+app.post('/:app_user/claim', async(req,res)=>{
+    try{
+        let user = await tables.AppUser.findOne({
+            where:{
+                username:req.params.app_user
+            }
+        });
+        
+        let food = req.body;
+        await tables.Food.update({
+            appUserId:user.id
+        },{
+            where:{
+                id:food.id
+            }
+        }).then(res.status(200).json({message:'Claimed!'}));
     }catch(err){
         res.status(500).json({message:err.message});
     }
