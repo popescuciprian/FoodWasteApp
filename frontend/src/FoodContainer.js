@@ -29,11 +29,13 @@ class FoodContainer extends Component {
     render() {
         return <div className="food_container">
             {
+                
                 this.state.foodList.map((food) =>
-                    <div key={food.id}>
+                    <div className="food_item" key={food.id}>
                         <div>{food.name}</div>
-                        <div>{food.exp_date}</div>
-                        <div>{food.availability.toString()}</div>
+                        <div>{food.category}</div>
+                        <div>{food.exp_date.slice(0,10)}</div>
+                        <div>{food.availability?"Public":"Private"}</div>
                     </div>
                 )
             }
