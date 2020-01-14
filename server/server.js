@@ -122,6 +122,20 @@ app.post('/:app_user/claim', async(req,res)=>{
         res.status(500).json({message:err.message});
     }
 });
+app.post('/:foodId/expose', async(req,res)=>{
+    try{
+        let foodId = req.params.foodId;
+        await tables.Food.update({
+            availability:true
+        },{
+            where:{
+                id:foodId
+            }
+        }).then(res.status(200).json({message:'Exposed!'}));
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
+});
 app.post('/relationships', async(req,res)=>{
     //TODO
 });
