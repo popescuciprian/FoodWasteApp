@@ -48,6 +48,6 @@ FoodServer.claimFood = async function claimFood(food){
 FoodServer.exposeFood = async function exposeFood(food){
     fetch(`${SERVER}/${food.id}/expose`)
         .then(response => response.json())
-        .then(FoodServer.emitter.emit('ADD_FOOD',food))
+        .then(FoodServer.emitter.emit('EXPOSE_FOOD',food))
 }
 export default FoodServer

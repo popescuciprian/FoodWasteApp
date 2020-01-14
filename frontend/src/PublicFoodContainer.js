@@ -20,17 +20,13 @@ class PublicFoodContainer extends Component {
         FoodServer.emitter.addListener('ADD_FOOD', (food) => {
             if (FoodServer.publicFoodList.indexOf(food) === -1 && food.availability)
                 FoodServer.publicFoodList.push(food);
-            this.setState({
-                foodList: FoodServer.publicFoodList
-            })
+            FoodServer.emitter.emit("GET_PUBLIC_FOODS_SUCCESS");
         });
 
         FoodServer.emitter.addListener('REMOVE_FOOD', (food) => {
             if (FoodServer.publicFoodList.indexOf(food) > -1)
-                FoodServer.publicFoodList.splice(FoodServer.publicFoodList.indexOf(food),1);
-            this.setState({
-                foodList: FoodServer.publicFoodList
-            })
+                FoodServer.publicFoodList.splice(FoodServer.publicFoodList.indexOf(food), 1);
+            FoodServer.emitter.emit("GET_PUBLIC_FOODS_SUCCESS");
         });
     }
     claimFood(food) {

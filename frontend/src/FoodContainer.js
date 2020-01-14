@@ -21,9 +21,16 @@ class FoodContainer extends Component {
         FoodServer.emitter.addListener('ADD_FOOD', (food) => {
             if (FoodServer.foodList.indexOf(food) === -1)
                 FoodServer.foodList.push(food);
-            this.setState({
-                foodList: FoodServer.foodList
-            })
+            FoodServer.emitter.emit("GET_FOODS_SUCCESS");
+        });
+
+        FoodServer.emitter.addListener('EXPOSE_FOOD', (food) => {
+            FoodServer.foodList[FoodServer.foodList.indexOf(food)].availability = true;
+            if (FoodServer.publicFoodList.indexOf(food) === -1)
+                FoodServer.publicFoodList.push(food);
+            FoodServer.emitter.emit("GET_FOODS_SUCCESS");
+            FoodServer.emitter.emit("GET_PUBLIC_FOODS_SUCCESS");
+            
         });
     }
 
@@ -40,7 +47,7 @@ class FoodContainer extends Component {
                     if (Date.parse(food.exp_date) < Date.now()) {
                         colorString = "red";
                     }
-                    if (Date.parse(food.exp_date) > Date.now() && Date.parse(food.exp_date)<Date.now()+7*DAY) {
+                    if (Date.parse(food.exp_date) > Date.now() && Date.parse(food.exp_date) < Date.now() + 7 * DAY) {
                         colorString = "orange";
                     }
                     return <div style={{ color: colorString }} className="food_item" key={food.id}>
