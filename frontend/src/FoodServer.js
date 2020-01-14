@@ -12,6 +12,13 @@ FoodServer.getFoods = async function getFoods() {
         .catch(err => console.warn(err));
     FoodServer.emitter.emit('GET_FOODS_SUCCESS')
 }
+FoodServer.getPublicFoods = async function getPublicFoods() {
+    FoodServer.foodList = [];
+    FoodServer.foodList = await fetch(`${SERVER}/foods`)
+        .then(response => response.json())
+        .catch(err => console.warn(err));
+    FoodServer.emitter.emit('GET_PUBLIC_FOODS_SUCCESS')
+}
 
 FoodServer.sendFood = async function sendFood(food) {
     fetch(`${SERVER}/${this.username}/foods`, {

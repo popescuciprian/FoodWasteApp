@@ -3,6 +3,7 @@ import FoodContainer from './FoodContainer'
 import AddFood from './AddFood'
 import './App.css';
 import FoodServer from './FoodServer';
+import PublicFoodContainer from './PublicFoodContainer';
 
 
 class FWApp extends Component {
@@ -19,6 +20,8 @@ class FWApp extends Component {
       </header>
         <FoodContainer username={this.username}/>
         <AddFood username={this.username}/>
+        <PublicFoodContainer/>
+
     </div>
   }
 }
