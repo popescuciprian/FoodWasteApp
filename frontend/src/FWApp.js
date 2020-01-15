@@ -19,7 +19,7 @@ class FWApp extends Component {
       <PublicFoodContainer />
       <FoodContainer username={this.username} />
       <AddFood username={this.username} />
-      <div className="fb-share-button" data-href="http://52.15.229.11:3000/" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F52.15.229.11%3A3000%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share to Facebook!</a></div>
+      <div className="fb-share-button" data-href="http://52.15.229.11:3000/" data-layout="button" data-size="large"><a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F52.15.229.11%3A8080%2F${this.username}%2Ffb_foods&amp;src=sdkpreparse`} className="fb-xfbml-parse-ignore">Share to Facebook!</a></div>
     </div>
   }
 }

@@ -50,6 +50,48 @@ try{
 }
 });
 
+app.get('/:app_user/fb_foods', async(req,res)=>{
+try{
+    let user = await tables.AppUser.findAll(
+    {
+        where:{
+            username:req.params.app_user
+        },
+        include:[{
+             model: tables.Food,
+             attributes: { exclude: ["id","appUserId","availability"] }
+        }]
+    });
+    if(user){
+        let output = `${req.params.app_user}'s' food list:\n`;
+        user[0].food.forEach(food=>{
+            output += `\n${food.name}\n${food.category}\nExp. Date:${food.exp_date.toString().slice(0, 10)}\n`;
+        });
+        res.status(200).send(output);
+    }
+    else throw new Error();
+}catch(err){
+    res.status(500).json({message:err.message});
+}
+});
+app.get('/:app_user/foods', async(req,res)=>{
+try{
+    let user = await tables.AppUser.findAll(
+    {
+        where:{
+            username:req.params.app_user
+        },
+        include:[{
+             model: tables.Food
+        }]
+    });
+    if(user)res.status(200).json(user[0].food);
+    else throw new Error();
+}catch(err){
+    res.status(500).json({message:err.message});
+}
+});
+
 app.get('/food_categories', async(req,res)=>{
     //TODO
 });
