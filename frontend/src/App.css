@@ -25,7 +25,9 @@
     overflow-y:scroll;
     height: 800px;
 }
-
 .add_food_container{
     padding: 10px;
+}
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
